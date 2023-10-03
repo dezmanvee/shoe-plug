@@ -20,6 +20,16 @@ const Nav = () => {
             );
           })}
         </ul>
+        <div className="font-montserrat leading-normal text-lg max-lg:hidden">
+            <a href="/">
+                Sign in / Explore now
+            </a>
+        </div>
+        <div className="hidden max-lg:block">
+            <img src={hamburger} alt="Hamburger"
+            width={25}
+            height={25} />
+        </div>
       </nav>
     </header>
   );
