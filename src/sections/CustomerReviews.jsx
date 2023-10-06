@@ -14,7 +14,7 @@ const CustomerReviews = () => {
       </p>
       <div className="flex-1 mt-24 flex justify-evenly items-center max-lg:flex-col gap-14">
         {reviews.map((review) => {
-          const { customerName, feedback, imgURL, rating } = review;
+          const { customerName} = review;
           return <ReviewCard key={customerName} {...review} />;
         })}
       </div>
