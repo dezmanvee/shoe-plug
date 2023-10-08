@@ -1,16 +1,38 @@
 import { headerLogo } from "../assets/images";
 import { hamburger } from "../assets/icons";
 import { navLinks } from "../constants";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 
 const Nav = () => {
   const [mobileToggle, setMobileToggle] = useState(true);
-  
+
+  const navContainerRef = useRef(null);
+
+  useEffect(() => {
+    const navHeight = navContainerRef.current.getBoundingClientRect().height;
+
+    const handleScroll = () => {
+      let scrollHeight = window.scrollY;
+      if (scrollHeight > navHeight) {
+        navContainerRef.current.style.boxShadow = "0 0 5px rgba(0,0,0,0.3)";
+      } else {
+        navContainerRef.current.style.boxShadow = "none";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header
       id="navHeader"
       className="padding-x py-8 fixed z-10 w-full bg-white"
+      ref={navContainerRef}
     >
       <nav className="flex justify-between items-center max-container max-lg:h-auto max-lg:items-start max-lg:relative">
         <a href="/">
@@ -25,7 +47,12 @@ const Nav = () => {
             {navLinks.map((link) => {
               const { href, label } = link;
               return (
-                <li key={label}>
+                <li
+                  key={label}
+                  onClick={() => {
+                    setMobileToggle(!mobileToggle);
+                  }}
+                >
                   <a
                     href={href}
                     className="font-montserrat leading-normal text-lg text-slate-gray max-lg:font-bold"
