@@ -1,6 +1,6 @@
 import { headerLogo } from "../assets/images";
 import { hamburger } from "../assets/icons";
-import { navLinks } from "../constants";
+import { navLinks, socialMedia } from "../constants";
 import { useState, useRef, useEffect } from "react";
 import { GrClose } from "react-icons/gr";
 
@@ -31,7 +31,7 @@ const Nav = () => {
   return (
     <header
       id="navHeader"
-      className="padding-x py-8 fixed z-10 w-full bg-white"
+      className="padding-x py-8 fixed z-20 w-full bg-white"
       ref={navContainerRef}
     >
       <nav className="flex justify-between items-center max-container max-lg:h-auto max-lg:items-start max-lg:relative">
@@ -62,6 +62,19 @@ const Nav = () => {
                 </li>
               );
             })}
+            <div className="flex-1 self-center hidden max-lg:flex items-center gap-8 h-auto p-4">
+            {socialMedia.map((icon) => {
+              const { alt, src} = icon;
+              return (
+                <div
+                  key={alt}
+                  className="flex justify-center items-center w-10 h-10 bg-white rounded-full border-2 border-coral-red hover:cursor-pointer"
+                >
+                  <img src={src} alt={alt} />
+                </div>
+              );
+            })}
+          </div>
           </div>
         </ul>
         <div className="font-montserrat leading-normal text-lg max-lg:hidden">
